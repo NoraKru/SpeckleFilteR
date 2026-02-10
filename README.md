@@ -56,4 +56,15 @@ evaluation$metrics
 evaluation$summary
 ```
 
+## Dependencies
+
+- R >= 4.0
+- Required packages: terra, raster
+
+## References
+
+- Lecture notes: Tobias Ullmann, Julius-Maximilians-Universität Würzburg
+- Santoso, A.W., Bayuaji, L., Lim, T.S., Lateh, H., & Zain, J.M. (2016). *Comparison of Various Speckle Noise Reduction Filters on Synthetic Aperture Radar Image.* International Journal of Applied Engineering Research, 11(15), 8760–8767. [http://www.ripublication.com](http://www.ripublication.com)
+
+
 
