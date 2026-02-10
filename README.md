@@ -7,6 +7,8 @@ Filters: Median Filter, Mean Filter, Lee Filter and Kuan Filter
 Metrics: Mean Square Error (MSE), Average Difference (AD), Speckle Index (SI), Peak Signal to Noise Ratio (PSNR) and Signal to Noise Ratio (SNR)
 
 ## Installation
+The package was developed on R version 4.5.1.
+
 You can install the package directly from GitHub:
 
 ```r
