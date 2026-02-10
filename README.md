@@ -21,7 +21,9 @@ Speckle is a granular noise that naturally occurs in coherent imaging systems, s
 `SpeckleFilteR` offers a streamlined workflow to:
 
 **1.** Apply different speckle filters (Kuan, Lee, Median, Mean)
+
 **2.** Evaluate filter performance using multiple metrics (MSE, AD, SI, PSNR, SNR)
+
 **3.** Identify the best performing filter
 
 This package is useful for researchers and practitioners working with noisy data or imagery
