@@ -7,5 +7,8 @@ You can install the package directly from GitHub:
 
 ```r
 # install.packages("devtools") if not already installed
-remotes::install_github("NoraKru/SpeckleFilteR")
+remotes::install_github("NoraKru/SpeckleFilteR")´´´
+
+## Instalation
+
 
