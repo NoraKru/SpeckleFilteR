@@ -2,8 +2,9 @@
 
 `SpeckleFilteR` is an R package for applying and evaluating speckle filters on SAR images (e.g., Sentinel-1) that have been **preprocessed with orbit correction and calibration**. It provides several popular filters and metrics to help you select the best filter for your data.
 
-Filters = Median Filter, Mean Filter, Lee Filter and Kuan Filter 
-Metrics = Mean Square Error (MSE), Average Difference (AD), Speckle Index (SI), Peak Signal to Noise Ratio (PSNR) and Signal to Noise Ratio (SNR)
+Filters: Median Filter, Mean Filter, Lee Filter and Kuan Filter 
+
+Metrics: Mean Square Error (MSE), Average Difference (AD), Speckle Index (SI), Peak Signal to Noise Ratio (PSNR) and Signal to Noise Ratio (SNR)
 
 ## Installation
 You can install the package directly from GitHub:
