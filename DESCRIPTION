@@ -1,0 +1,16 @@
+Package: SpeckleFilteR
+Type: Package
+Title: Speckle Filters and Quality Metrics for Satellite Images
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Nora", "Krumwiede",
+      email = "nora@krumwiede-web.de",
+      role = c("aut", "cre")
+    )
+  )
+Description: This package provides various speckle filters and functions for evaluating the quality of speckle filtering.
+License: MIT
+Encoding: UTF-8
+Imports: terra, raster
+RoxygenNote: 7.3.3
