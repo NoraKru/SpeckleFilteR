@@ -66,8 +66,15 @@ evaluate_all_metrics <- function(image, filtered_image) {
     "The ranking is based on a simple scoring scheme across all metrics."
   )
 
-  list(
+  # ---- Print results directly ----
+  cat("=== Filter Evaluation Metrics ===\n")
+  print(df)
+  cat("\n=== Summary ===\n")
+  cat(summary_text, "\n")
+
+  # ---- Return results invisibly ----
+  invisible(list(
     metrics = df,
-    summary = summary
-  )
+    summary = summary_text
+  ))
 }

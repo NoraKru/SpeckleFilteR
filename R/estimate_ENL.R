@@ -41,7 +41,7 @@ estimate_enl <- function(raster) {
   dev.new(noRStudioGD = TRUE)
 
   # --- Plot first band for interactive selection ---
-  terra::plot(log10(rast_obj + 1e-6), main="Select AOI: Please select a homogeneous, flat area in the satellite image.\n Click multiple points to define a polygon.\n Press ESC when done. ")
+  terra::plot(log10(rast_obj + 1e-6), main="Please select a homogeneous area in the satellite image.\n Click multiple points to define a polygon.\n Press ESC when done. ")
 
   # --- Draw polygon ---
   aoi <- terra::draw(x="polygon")
