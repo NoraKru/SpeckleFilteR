@@ -14,11 +14,8 @@
 #' enl <- estimate_enl(img)  # interactive: select region with mouse
 #' }
 #' @export
+#' @importFrom terra rast plot draw crop values crs ext
 estimate_enl <- function(raster) {
-
-  if (!requireNamespace("terra", quietly = TRUE)) {
-    stop("Package 'terra' is required for this function.")
-  }
 
   # --- Convert input to SpatRaster if necessary ---
   if (inherits(raster, "SpatRaster")) {
@@ -44,17 +41,15 @@ estimate_enl <- function(raster) {
   dev.new(noRStudioGD = TRUE)
 
   # --- Plot first band for interactive selection ---
-  terra::plot(log10(rast_obj + 1e-6), main="Select AOI (log10)")
+  terra::plot(log10(rast_obj + 1e-6), main="Select AOI: Please select a homogeneous, flat area in the satellite image.\n Click multiple points to define a polygon.\n Press ESC when done. ")
 
   # --- Draw polygon ---
   aoi <- terra::draw(x="polygon")
-
 
   # --- Ensure CRS matches ---
   if (is.na(terra::crs(aoi))) terra::crs(aoi) <- terra::crs(rast_obj)
 
   rast_aoi <- terra::crop(rast_obj, aoi)
-
 
   # --- Extract values as numeric vector ---
   vals <- terra::values(rast_aoi, mat = FALSE)
@@ -67,5 +62,3 @@ estimate_enl <- function(raster) {
   message(sprintf("Estimated ENL from selected AOI: %.2f", ENL))
   return(ENL)
 }
-
-
