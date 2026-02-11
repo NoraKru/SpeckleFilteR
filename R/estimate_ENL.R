@@ -51,9 +51,9 @@ estimate_enl <- function(raster) {
 
 
   # --- Ensure CRS matches ---
-  if (is.na(crs(aoi))) crs(aoi) <- crs(rast_obj)
+  if (is.na(terra::crs(aoi))) terra::crs(aoi) <- terra::crs(rast_obj)
 
-  rast_aoi <- crop(rast_obj, aoi)
+  rast_aoi <- terra::crop(rast_obj, aoi)
 
 
   # --- Extract values as numeric vector ---
