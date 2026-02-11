@@ -28,7 +28,7 @@ estimate_enl <- function(raster) {
   } else if (is.matrix(raster)) {
     rast_obj <- terra::rast(raster)
     # Set default extent so coordinates exist
-    ext(rast_obj) <- c(0, ncol(raster), 0, nrow(raster))
+    terra::ext(rast_obj) <- c(0, ncol(raster), 0, nrow(raster))
   } else {
     stop("Input must be a numeric matrix, RasterLayer, or SpatRaster")
   }
