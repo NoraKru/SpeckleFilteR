@@ -12,7 +12,7 @@ The package was developed on R version 4.5.1.
 You can install the package directly from GitHub:
 
 ```r
-# install.packages("devtools") if not already installed
+# install.packages("remotes") if not already installed
 remotes::install_github("NoraKru/SpeckleFilteR")
 ```
 
