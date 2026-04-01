@@ -12,18 +12,7 @@ The package was developed on R version 4.5.1.
 You can install the package directly from GitHub:
 
 ```r
-# List of required packages
-packages <- c("terra", "raster", "remotes")
-
-# Check which packages are missing
-missing_packages <- packages[!(packages %in% installed.packages()[,"Package"])]
-
-# Install only missing packages
-if (length(missing_packages) > 0) {
-  install.packages(missing_packages)
-} else {
-  message("All packages are already installed!")
-}
+#package 'remotes' is necessary
 remotes::install_github("NoraKru/SpeckleFilteR")
 ```
 
