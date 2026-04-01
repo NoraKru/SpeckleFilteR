@@ -66,6 +66,14 @@ evaluation$metrics
 #Summary sentence indicating which filter performed best
 evaluation$summary
 ```
+## Mathematical Background & Methodology
+
+**Speckle Filter**
+
+Mean Filter: A simple linear filter that replaces each pixel value with the average of its neighbors in an N×N window.
+<img width="1746" height="531" alt="mean_filter" src="https://github.com/user-attachments/assets/ffc4759a-233a-4293-91e0-5d6d59a9d0e0" />
+
+
 
 ## Dependencies
 
