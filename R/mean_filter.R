@@ -1,6 +1,6 @@
 #' Mean Filter for Speckle Noise
 #'
-#' Applies a mean filter to a grayscale image or raster to reduce speckle noise.
+#' Applies a mean filter to a grayscale image/raster to reduce speckle noise.
 #'
 #' @param image A numeric matrix, raster::RasterLayer, or terra::SpatRaster representing the image.
 #' @param window_size An integer specifying the size of the mean filter window. Default is 3.
@@ -16,6 +16,7 @@
 
 mean_filter <- function(image, window_size = 3) {
 
+  #with prepare_image a raster or spatraster get transformed in to matrix
   info <- .prepare_image(image)
   img <- info$matrix
 
@@ -25,6 +26,7 @@ mean_filter <- function(image, window_size = 3) {
 
   filtered <- matrix(0, nrow = nrow, ncol = ncol)
 
+  #for Loop for calculating filtered image (see the mathematical background in the ReadMe)
   for (i in 1:nrow) {
     for (j in 1:ncol) {
       row_range <- max(1, i - radius) : min(nrow, i + radius)
@@ -34,7 +36,7 @@ mean_filter <- function(image, window_size = 3) {
     }
   }
 
-  # filtered_matrix <- as.matrix(filtered)
+  # Return result matrix in same type as input
   result <- .reconstruct_image(filtered, info)
 
   return(result)

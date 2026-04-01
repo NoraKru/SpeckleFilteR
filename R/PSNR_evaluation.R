@@ -18,28 +18,35 @@
 
 PSNR_evaluation <- function(image, filtered_image, filter_name = NULL) {
 
-  # Check input type for image and convert to matrix if needed
+  # Prepare original image and extract dimensions
   info <- .prepare_image(image)
   img <- info$matrix
+  n_r <- nrow(img)
+  n_c <- ncol(img)
 
-  # Check input type for filtered_image and convert to matrix if needed
+  # Prepare filtered image and convert to matrix
   filtered_info <- .prepare_image(filtered_image)
   img_filtered <- filtered_info$matrix
 
-  n_r <- nrow(img)
-  n_c <- ncol(img)
+  # Initialize sum for Mean Squared Error (MSE) calculation
   mse_sum <-0
 
-  for (i in 1:n_r) {       # iterate over rows
-    for (j in 1:n_c) {     # iterate over columns
+  # Iterate over rows and columns for pixel-wise comparison
+  for (i in 1:n_r) {
+    for (j in 1:n_c) {
       mse_sum <- mse_sum + (img[i,j]-img_filtered[i,j])^2
     }
   }
+
+  # Calculate Mean Squared Error (MSE)
   mse <-mse_sum/(n_r*n_c)
 
+  # Calculate the Peak Signal-to-Noise Ratio (PSNR)
+  # Uses the maximum intensity value of the original image
   max_I <- max(img)
   psnr <- 10*log10((max_I/mse))
 
+  # Return result as data.frame if a filter name is provided, otherwise as a numeric value
   if (!is.null(filter_name)) {
     return(data.frame(filter = filter_name, PSNR = psnr))
   } else {

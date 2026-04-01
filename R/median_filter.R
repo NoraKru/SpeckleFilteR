@@ -1,6 +1,6 @@
 #' Median Filter for Speckle Noise
 #'
-#' Applies a median filter to a grayscale image or raster to reduce speckle noise.
+#' Applies a median filter to a grayscale image/raster to reduce speckle noise.
 #'
 #' @param image A numeric matrix, raster::RasterLayer, or terra::SpatRaster representing the image.
 #' @param window_size An integer specifying the size of the median filter window. Default is 3.
@@ -16,6 +16,7 @@
 
 median_filter <- function(image, window_size = 3) {
 
+  #with prepare_image a raster or spatraster get transformed in to matrix
   info <- .prepare_image(image)
   img  <- info$matrix
 
@@ -25,17 +26,17 @@ median_filter <- function(image, window_size = 3) {
 
   filtered <- matrix(0, nrow = n_r, ncol = n_c)
 
+  #for Loop for calculating filtered image (see the mathematical background in the ReadMe)
   for (i in 1:n_r) {
     for (j in 1:n_c) {
       row_range <- max(1, i - radius) : min(n_r, i + radius)
       col_range <- max(1, j - radius) : min(n_c, j + radius)
-
       window <- img[row_range, col_range]
       filtered[i, j] <- median(window)
     }
   }
 
-  # Return result in same type as input
+  # Return result matrix in same type as input
   result <- .reconstruct_image(filtered, info)
   return(result)
 }

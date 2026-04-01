@@ -4,9 +4,7 @@
 #' to estimate the Equivalent Number of Looks (ENL) for speckle filtering.
 #' Click multiple points to define a polygon and press ESC when done.
 #'
-#' @param raster A numeric matrix, raster::RasterLayer or terra::SpatRaster.
-#'               Only the first band will be used for interactive selection. Matrices and RasterLayers
-#'               will automatically be converted to a \code{SpatRaster}.
+#' @param raster A numeric matrix, RasterLayer, or terra::SpatRaster.
 #' @return A numeric value representing the estimated ENL.
 #' @examples
 #' \dontrun{
@@ -17,7 +15,7 @@
 #' @importFrom terra rast plot draw crop values crs ext
 estimate_ENL <- function(raster) {
 
-  # --- Convert input to SpatRaster if necessary ---
+  # Input Conversion
   if (inherits(raster, "SpatRaster")) {
     rast_obj <- raster
   } else if (inherits(raster, "RasterLayer")) {
@@ -30,7 +28,7 @@ estimate_ENL <- function(raster) {
     stop("Input must be a numeric matrix, RasterLayer, or SpatRaster")
   }
 
-  # --- Instructions for the user ---
+  # Instructions for the user
   cat("****************************************\n")
   cat("ENL not provided.\n")
   cat("Please select a homogeneous, flat area in the satellite image.\n")
@@ -38,40 +36,37 @@ estimate_ENL <- function(raster) {
   cat("Press ESC when done.\n")
   cat("****************************************\n")
 
+  # Open a new external graphics device for better interactivity
   dev.new(noRStudioGD = TRUE)
 
-  # --- Plot first band for interactive selection ---
-  #terra::plot(log10(rast_obj + 1e-6), main="Please select a homogeneous area in the satellite image.\n Click multiple points to define a polygon.\n Press ESC when done. ")
-  # 1. Vorbereitung (wie gehabt)
+  # Visualization Setup (Adaptive Scale)
   all_values <- as.matrix(rast_obj)
   color_breaks <- quantile(all_values, probs = seq(0, 1, length.out = 257), na.rm = TRUE)
   color_breaks <- unique(color_breaks)
   my_cols <- viridis::viridis(length(color_breaks) - 1)
-  layout(matrix(c(1, 2), nrow = 1), widths = c(1, 4))
-  # 2. Plotten mit terra::plot
-  # Wir deaktivieren die Standard-Legende (plegend=FALSE),
-  # um die volle Kontrolle zu behalten, ODER wir konfigurieren sie:
 
-  # --- 1. Zuerst die Legende (geht in den linken Slot) ---
+  #Configure layout: Legend on the left (1), Image on the right (4)
+  layout(matrix(c(1, 2), nrow = 1), widths = c(1, 4))
+
+
+  # Plot Legend (Left Slot)
   plot.new()
   plot.window(xlim = c(0, 1), ylim = c(0, 1))
 
-  # Balken etwas weiter links positionieren (0.1 bis 0.3)
+  # Render the adaptive color bar
   rasterImage(as.raster(rev(viridis::viridis(256))), 0.1, 0.05, 0.3, 0.95)
 
+  # Define legend labels based on data quantiles
   break_indices <- round(seq(1, length(color_breaks), length.out = 5))
   tick_labels    <- round(color_breaks[break_indices], 3)
   tick_positions <- seq(0.05, 0.95, length.out = 5)
 
-  # Achse diesmal auf der LINKEN Seite des Balkens (axis side 2) oder RECHTS (side 4)
-  # Ich lasse sie rechts vom Balken (side 4), aber innerhalb des linken Slots
+  # Add axis ticks and labels
   axis(4, at = tick_positions, labels = FALSE, pos = 0.35, tcl = -0.2)
   text(x = 0.4, y = tick_positions, labels = tick_labels, adj = 0, xpd = TRUE, cex = 0.9)
   mtext("Scala", side = 3, at = 0.2, line = 0.5, font = 2)
 
-  # --- 2. Dann das Bild (geht in den rechten Slot) ---
-  # WICHTIG: Da dies der LETZTE Plot ist, bleibt das Koordinatensystem
-  # für terra::draw() hier aktiv!
+  # Plot Image (Right Slot)
   terra::plot(rast_obj,
               main = "Select area (Click points, then ESC)",
               col = my_cols,
@@ -79,21 +74,27 @@ estimate_ENL <- function(raster) {
               axes = TRUE,
               mar = c(3, 1, 3, 3), # Margins anpassen
               legend = FALSE)
-  # --- Draw polygon ---
+
+  # Interactive AOI Selection
   aoi <- terra::draw(x="polygon")
 
-  # --- Ensure CRS matches ---
+  #Statistical Processing
+  # Ensure CRS consistency
   if (is.na(terra::crs(aoi))) terra::crs(aoi) <- terra::crs(rast_obj)
 
+  # Crop image to selected Area of Interest (AOI)
   rast_aoi <- terra::crop(rast_obj, aoi)
 
-  # --- Extract values as numeric vector ---
+  # Extract numeric values and remove NAs
   vals <- terra::values(rast_aoi, mat = FALSE)
   vals <- as.numeric(vals)
   vals <- vals[!is.na(vals)]
 
-  # --- Calculate ENL ---
+  # Calculate ENL using the formula: (mean^2) / variance
   ENL <- mean(vals)^2 / var(vals)
+
+  # Reset layout to default
+  par(mfrow = c(1, 1))
 
   message(sprintf("Estimated ENL from selected AOI: %.2f", ENL))
   return(ENL)

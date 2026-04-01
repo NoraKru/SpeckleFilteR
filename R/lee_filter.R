@@ -1,11 +1,11 @@
 #' Lee Filter for Speckle Noise
 #'
-#' Applies a Lee filter to a grayscale image or raster to reduce speckle noise.
+#' Applies a Lee filter to a grayscale image/raster to reduce speckle noise.
 #'
 #' Source: Active Remote Sensing - Tobi Ullmann
 #'
 #' @param image A numeric matrix, raster::RasterLayer, or terra::SpatRaster representing the image.
-#' @param window_size An odd integer specifying the size of the local window. Default is 3.
+#' @param window_size An integer specifying the size of the local window. Default is 3.
 #' @param ENL Equivalent number of looks.
 #' @return The filtered image. Returns a matrix if input was a matrix, RasterLayer if input was raster::RasterLayer, or SpatRaster if input was terra::SpatRaster.
 #' @examples
@@ -17,6 +17,7 @@
 #'
 lee_filter <- function(image, window_size = 3, ENL = NULL) {
 
+  #with prepare image a raster or spatraster get transformed in to matrix
   info <- .prepare_image(image)
   img <- info$matrix
 
@@ -33,12 +34,15 @@ lee_filter <- function(image, window_size = 3, ENL = NULL) {
   # noise variation coefficient
   C_u <- sqrt(1 / ENL)
 
+  #for Loop for calculating filtered image (see the mathematical background in the ReadMe)
   for (i in 1:n_r) {
     for (j in 1:n_c) {
+      # define neighborhood window
       row_range <- max(1, i - radius) : min(n_r, i + radius)
       col_range <- max(1, j - radius) : min(n_c, j + radius)
       window <- img[row_range, col_range]
 
+      # local mean and sd
       local_mean  <- mean(window)
       local_sigma <- sd(as.vector(window))
 
@@ -47,8 +51,10 @@ lee_filter <- function(image, window_size = 3, ENL = NULL) {
         next
       }
 
+      # Image variation coefficient
       C_i <- local_sigma / local_mean
 
+      # weight
       W <- 1 - (C_u^2 / C_i^2)
       W <- max(0, min(W, 1))
 
@@ -56,6 +62,6 @@ lee_filter <- function(image, window_size = 3, ENL = NULL) {
     }
   }
 
-  # Return result in same type as input
+  # Return result matrix in same type as input
   .reconstruct_image(filtered, info)
 }

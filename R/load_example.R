@@ -5,7 +5,6 @@
 #' @return A SpatRaster object
 #' @examples
 #' img <- load_example()
-#' plot(img)
 #' @export
 load_example <- function() {
   f <- system.file("extdata", "sentinel.tif", package = "SpeckleFilteR")

@@ -5,8 +5,7 @@
 #'
 #' @param image Original image (matrix or raster)
 #' @param filtered_image A single filtered image or a named list of filtered images
-#'
-#' @return A data.frame with one row per filter and one column per metric
+#' @return A list containing a ranked data.frame of metrics and a textual summary.
 #' @examples
 #' \dontrun{
 #' img <- load_example()
@@ -14,23 +13,22 @@
 #' metrics <- evaluate_all_metrics(img, filters)
 #' # Ranked table of evaluation metrics
 #' print(results$metrics)
-#'
 #' # Short textual summary
 #' cat(results$summary)
 #' }
 #' @export
 evaluate_all_metrics <- function(image, filtered_image) {
 
-  # ---- Case 1: single filtered image → convert to list ----
+  # If a single image is provided, wrap it in a list for consistent processing
   if (!is.list(filtered_image)) {
     filtered_image <- list(filter = filtered_image)
   }
 
-  # ---- Compute evaluation metrics ----
+  # Iterate through the list of filters and compute all five evaluation metrics
   df <- do.call(rbind, lapply(names(filtered_image), function(name) {
 
     f_img <- filtered_image[[name]]
-
+    # Extract individual metrics using the previously defined evaluation functions
     data.frame(
       filter = name,
       MSE  = MSE_evaluation(image, f_img),
@@ -42,23 +40,28 @@ evaluate_all_metrics <- function(image, filtered_image) {
     )
   }))
 
-  # ---- Compute score (+1 for best per metric) ----
+  # Initialize a scoring column to rank the filters.
+  # Points are awarded to the 'best' performer in each category.
   df$score <- 0
 
+  # Lower values are better for error-based metrics (MSE, AD, SI)
   df$score[which.min(df$MSE)]  <- df$score[which.min(df$MSE)]  + 1
   df$score[which.min(df$AD)]   <- df$score[which.min(df$AD)]   + 1
   df$score[which.min(df$SI)]   <- df$score[which.min(df$SI)]   + 1
+
+  # Higher values are better for quality-based metrics (PSNR, SNR)
   df$score[which.max(df$PSNR)] <- df$score[which.max(df$PSNR)] + 1
   df$score[which.max(df$SNR)]  <- df$score[which.max(df$SNR)]  + 1
 
-  # ---- Rank filters by total score ----
+  # Rank filters based on their cumulative score (descending order)
   df$rank <- rank(-df$score, ties.method = "min")
   df <- df[order(df$rank), ]
   rownames(df) <- NULL
 
-  # ---- Short textual summary ----
+  # Identify the top-performing filter for the summary
   best_filter <- df$filter[1]
 
+  # Generate a concise technical summary of the results
   summary <- paste(
     "The filter", best_filter, "achieves the best overall performance.",
     "It provides the most favorable balance between low error measures",
@@ -66,13 +69,13 @@ evaluate_all_metrics <- function(image, filtered_image) {
     "The ranking is based on a simple scoring scheme across all metrics."
   )
 
-  # ---- Print results directly ----
+  # Print the results to the console for immediate review
   cat("=== Filter Evaluation Metrics ===\n")
   print(df)
   cat("\n=== Summary ===\n")
   cat(summary, "\n")
 
-  # ---- Return results invisibly ----
+  # Return results as a list
   invisible(list(
     metrics = df,
     summary = summary

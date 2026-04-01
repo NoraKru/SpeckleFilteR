@@ -1,11 +1,11 @@
 #' Kuan Filter for Speckle Noise
 #'
-#' Applies a Kuan filter to a grayscale image or raster to reduce speckle noise.
+#' Applies a Kuan filter to a grayscale image/raster to reduce speckle noise.
 #'
 #'Source: Active Remote Sensing - Tobi Ullmann
 #'
 #' @param image A numeric matrix, raster::RasterLayer, or terra::SpatRaster representing the image.
-#' @param window_size An odd integer specifying the size of the local window. Default is 3.
+#' @param window_size An integer specifying the size of the local window. Default is 3.
 #' @param ENL Equivalent number of looks.
 #' @return The filtered image. Returns a matrix if input was a matrix, RasterLayer if input was raster::RasterLayer, or SpatRaster if input was terra::SpatRaster.
 #' @examples
@@ -17,6 +17,7 @@
 
 kuan_filter <- function(image, window_size = 3, ENL=0) {
 
+  #with prepare_image a raster or spatraster get transformed in to matrix
   info <- .prepare_image(image)
   img <- info$matrix
 
@@ -33,6 +34,7 @@ kuan_filter <- function(image, window_size = 3, ENL=0) {
   # noise variation coefficient
   C_u <- sqrt(1/ENL)
 
+  #for Loop for calculating filtered image (see the mathematical background in the ReadMe)
   for (i in 1:n_r) {
     for (j in 1:n_c) {
       # define neighborhood window
@@ -56,11 +58,10 @@ kuan_filter <- function(image, window_size = 3, ENL=0) {
       W <- (1 - (C_u^2 / C_i^2)) / (1 + C_u^2)
       W <- max(0, min(W, 1))
 
-      # filtered pixel
       filtered[i,j] <- img[i,j] * W + local_mean * (1-W)
     }
   }
 
-  # Return result in same type as input
+  # Return result matrix in same type as input
   .reconstruct_image(filtered, info)
 }
