@@ -70,16 +70,18 @@ evaluation$summary
 
 **Speckle Filters:**
 
-Mean Filter: A simple linear filter that replaces each pixel value with the average of its neighbors in an N×N window.
+You can run the four speckle filters in this package separately or all at the same time with ```all_filters()```
+
+**Mean Filter (```mean_filter()```):** A simple linear filter that replaces each pixel value with the average of its neighbors in an N×N window.
 <img width="1746" height="531" alt="mean_filter" src="https://github.com/user-attachments/assets/ffc4759a-233a-4293-91e0-5d6d59a9d0e0" />
 
-Median Filter: A non-linear filter that replaces the center pixel with the median value of the NxN window.
+**Median Filter (```medan_filter()```):** A non-linear filter that replaces the center pixel with the median value of the NxN window.
 <img width="2350" height="958" alt="MedianFilter" src="https://github.com/user-attachments/assets/c33d0421-0849-462a-8613-7f645733bae5" />
 
-Lee Filter: The Lee filter is an adaptive speckle reduction tool that balances noise smoothing with edge preservation. It calculates a weighting factor W by comparing known sensor noise (Cu) to the local variance (Ci) of each window. In high-contrast areas like edges, the filter maintains the original pixel values to keep the image sharp. In homogeneous regions, it applies strong smoothing to effectively remove graininess without blurring structural details.
+**Lee Filter (```lee_filter()```):** The Lee filter is an adaptive speckle reduction tool that balances noise smoothing with edge preservation. It calculates a weighting factor W by comparing known sensor noise (Cu) to the local variance (Ci) of each window. In high-contrast areas like edges, the filter maintains the original pixel values to keep the image sharp. In homogeneous regions, it applies strong smoothing to effectively remove graininess without blurring structural details.
 <img width="2349" height="845" alt="RplotLeeFilter" src="https://github.com/user-attachments/assets/ee299d45-ef64-4077-b0cf-1b6ec8c2c0bd" />
 
-Kuan Filter: The Kuan filter represents an advancement of the Lee filter, employing a modified weighting function based on the Minimum Mean Square Error (MMSE) criterion.
+**Kuan Filter (```kuan_filter()```):** The Kuan filter represents an advancement of the Lee filter, employing a modified weighting function based on the Minimum Mean Square Error (MMSE) criterion.
 <img width="1735" height="594" alt="KuanFilter" src="https://github.com/user-attachments/assets/d37fa65f-b016-42d7-95ab-e9add549c569" />
 
 **Equivalent Number of Looks:**
