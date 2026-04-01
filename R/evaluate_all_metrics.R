@@ -75,6 +75,6 @@ evaluate_all_metrics <- function(image, filtered_image) {
   # ---- Return results invisibly ----
   invisible(list(
     metrics = df,
-    summary = summary_text
+    summary = summary
   ))
 }
