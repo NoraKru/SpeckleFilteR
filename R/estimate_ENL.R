@@ -11,11 +11,11 @@
 #' @examples
 #' \dontrun{
 #' img <- load_example()
-#' enl <- estimate_enl(img)  # interactive: select region with mouse
+#' enl <- estimate_ENL(img)  # interactive: select region with mouse
 #' }
 #' @export
 #' @importFrom terra rast plot draw crop values crs ext
-estimate_enl <- function(raster) {
+estimate_ENL <- function(raster) {
 
   # --- Convert input to SpatRaster if necessary ---
   if (inherits(raster, "SpatRaster")) {
