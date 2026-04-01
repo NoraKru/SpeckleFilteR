@@ -95,6 +95,17 @@ This function estimate the ENL by selecting a homogeneous region of interest (AO
 
 **Evaluation Metrics:**
 
+To scientifically assess the performance of the speckle filters, this package includes several evaluation metrics. These can be calculated individually or all at once using the ```evaluate_all_metrics()``` function. The specific mathematical derivation can be found in the source: 'Comparison of Various Speckle Noise Reduction Filters on Synthetic Aperture Radar Image' (Santoso, Bayuaji, Sze, Lateh, and Zain).
+
+| Metric | R-Function | Description | Better Performance |
+| -------- | -------- | -------- | -------- 
+| Average Difference | ```AD_evaluation()``` | Average pixel difference|  Lower Value  |
+| Mean Square Error | ```MSE_evaluation()``` | Average squared pixel error |   Lower Value  |
+|Speckle Index|```SI_evaluation()```|Average local contrast ratio| Lower Value |
+|Peak Signal-to-Noise Ratio|```PSNR_evaluation()```|Ratio of max signal power to noise| Higher Value|
+|Signal-to-Noise Ratio|```SNR_evaluation()```|Ratio of original signal to noise power|Higher Value|
+
+
 ## Dependencies
 
 - R >= 4.0
