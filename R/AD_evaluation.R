@@ -13,6 +13,7 @@
 #' filters <- all_filters(img, window_size = 3, ENL = 3.5, plot_result = FALSE)
 #' ad_metrics <- AD_evaluation(img, filters)
 #' print(ad_metrics)
+#' @importFrom stats quantile mean sd var median rank
 #' @export
 #'
 

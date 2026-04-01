@@ -16,6 +16,8 @@
 #' # Short textual summary
 #' cat(results$summary)
 #' }
+#' @import graphics
+#' @importFrom stats quantile mean sd var median rank
 #' @export
 evaluate_all_metrics <- function(image, filtered_image) {
 

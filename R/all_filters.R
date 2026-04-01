@@ -2,11 +2,15 @@
 #'
 #' Applies all filters to a grayscale image/raster to reduce speckle noise.
 #'
+#' @import viridis
 #' @param image A numeric matrix, raster::RasterLayer, or terra::SpatRaster representing the image.
 #' @param window_size An integer specifying the size of the window. Default is 3.
 #' @param ENL Effective Number of Looks.
 #' @param plot_result If TRUE, plots Original + filtered images.
 #' @return A named list with filtered images: $lee, $kuan, $mean, $median
+#' @importFrom grDevices as.raster
+#' @import graphics
+#' @importFrom stats quantile mean sd var median rank
 #' @export
 
 all_filters <- function(image, window_size = 3, ENL = NULL, plot_result = TRUE) {

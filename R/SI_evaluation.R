@@ -13,6 +13,7 @@
 #' filters <- all_filters(img, window_size = 3, ENL = 3.5, plot_result = FALSE)
 #' si_metrics <- SI_evaluation(img, filters)
 #' print(si_metrics)
+#' @importFrom stats quantile mean sd var median rank
 #' @export
 #'
 

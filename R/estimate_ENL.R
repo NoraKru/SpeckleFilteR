@@ -13,6 +13,11 @@
 #' }
 #' @export
 #' @importFrom terra rast plot draw crop values crs ext
+#' @importFrom grDevices as.raster
+#' @import viridis
+#' @import graphics
+#' @importFrom stats quantile mean sd var median rank
+#'
 estimate_ENL <- function(raster) {
 
   # Input Conversion
