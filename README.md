@@ -84,6 +84,10 @@ You can run the four speckle filters in this package separately or all at the sa
 **Kuan Filter (```kuan_filter()```):** The Kuan filter represents an advancement of the Lee filter, employing a modified weighting function based on the Minimum Mean Square Error (MMSE) criterion.
 <img width="1735" height="594" alt="KuanFilter" src="https://github.com/user-attachments/assets/d37fa65f-b016-42d7-95ab-e9add549c569" />
 
+When you run ```all_filters()```, you will see a visualization of the original image alongside the different filter outputs, structured as follows:
+<img width="1544" height="992" alt="Solution" src="https://github.com/user-attachments/assets/ec7692e4-c96f-4f76-9fbb-79a1f87a6718" />
+
+
 **Equivalent Number of Looks:**
 
 The Lee and Kuan filters need the Equivalent Number of Looks (ENL) to define the noise variation coefficient. This is a fundamental parameter in SAR image processing used to quantify the intensity of speckle noise. It describes the statistical "smoothness" of a homogeneous area:
