@@ -12,5 +12,5 @@ Authors@R: c(
 Description: This package provides various speckle filters and functions for evaluating the quality of speckle filtering.
 License: MIT
 Encoding: UTF-8
-Imports: terra, raster
+Imports: terra, raster, viridis
 RoxygenNote: 7.3.3
