@@ -70,7 +70,7 @@ evaluate_all_metrics <- function(image, filtered_image) {
   cat("=== Filter Evaluation Metrics ===\n")
   print(df)
   cat("\n=== Summary ===\n")
-  cat(summary_text, "\n")
+  cat(summary, "\n")
 
   # ---- Return results invisibly ----
   invisible(list(
