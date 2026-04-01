@@ -75,7 +75,7 @@ You can run the four speckle filters in this package separately or all at the sa
 **Mean Filter (```mean_filter()```):** A simple linear filter that replaces each pixel value with the average of its neighbors in an N×N window.
 <img width="1746" height="531" alt="mean_filter" src="https://github.com/user-attachments/assets/ffc4759a-233a-4293-91e0-5d6d59a9d0e0" />
 
-**Median Filter (```medan_filter()```):** A non-linear filter that replaces the center pixel with the median value of the NxN window.
+**Median Filter (```median_filter()```):** A non-linear filter that replaces the center pixel with the median value of the NxN window.
 <img width="2350" height="958" alt="MedianFilter" src="https://github.com/user-attachments/assets/c33d0421-0849-462a-8613-7f645733bae5" />
 
 **Lee Filter (```lee_filter()```):** The Lee filter is an adaptive speckle reduction tool that balances noise smoothing with edge preservation. It calculates a weighting factor W by comparing known sensor noise (Cu) to the local variance (Ci) of each window. In high-contrast areas like edges, the filter maintains the original pixel values to keep the image sharp. In homogeneous regions, it applies strong smoothing to effectively remove graininess without blurring structural details.
