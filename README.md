@@ -82,7 +82,7 @@ Lee Filter: The Lee filter is an adaptive speckle reduction tool that balances n
 Kuan Filter: The Kuan filter represents an advancement of the Lee filter, employing a modified weighting function based on the Minimum Mean Square Error (MMSE) criterion.
 <img width="1735" height="594" alt="KuanFilter" src="https://github.com/user-attachments/assets/d37fa65f-b016-42d7-95ab-e9add549c569" />
 
-**Equivalen Number of Looks**
+**Equivalent Number of Looks:**
 
 The Lee and Kuan filters need the Equivalent Number of Looks (ENL) to define the noise variation coefficient. This is a fundamental parameter in SAR image processing used to quantify the intensity of speckle noise. It describes the statistical "smoothness" of a homogeneous area:
 
@@ -92,6 +92,8 @@ High ENL: Indicates a "cleaner" image where multiple radar looks have been avera
 
 Need the ENL? Often you can find the Equivalent Number of Looks in your product metadata. If it's missing, simply use the built-in ```estimate_enl()``` function to estimate the ENL based on your specific image characteristics. 
 This function estimate the ENL by selecting a homogeneous region of interest (AOI) directly on a plot. It then calculates the ENL based on the statistical relationship between the squared mean and the variance of the pixel intensities within that area.
+
+**Evaluation Metrics:**
 
 ## Dependencies
 
