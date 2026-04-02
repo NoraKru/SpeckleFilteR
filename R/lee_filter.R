@@ -23,7 +23,7 @@ lee_filter <- function(image, window_size = 3, ENL = NULL) {
 
   # stop if ENL is not given
   if (is.null(ENL)) {
-    stop("ENL not provided. Use estimate_enl() or provide ENL manually.")
+    stop("ENL not provided. Use estimate_ENL() or provide ENL manually.")
   }
 
   n_r <- nrow(img)
