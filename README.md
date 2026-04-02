@@ -86,7 +86,7 @@ Low ENL: Indicates a "noisy" image with high speckle variance.
 High ENL: Indicates a "cleaner" image where multiple radar looks have been averaged to reduce graininess.
 
 Need the ENL? Often you can find the Equivalent Number of Looks in your product metadata. If it's missing, simply use the built-in ```estimate_ENL()``` function to estimate the ENL based on your specific image characteristics. 
-This function estimate the ENL by selecting a homogeneous region of interest (AOI) directly on a plot. It then calculates the ENL based on the statistical relationship between the squared mean and the variance of the pixel intensities within that area.
+This function estimates the ENL by selecting a homogeneous region of interest (AOI) directly on a plot. It then calculates the ENL based on the statistical relationship between the squared mean and the variance of the pixel intensities within that area.
 
 **Evaluation Metrics:**
 
