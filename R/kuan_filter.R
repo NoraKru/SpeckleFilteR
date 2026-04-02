@@ -15,7 +15,7 @@
 #' }
 #' @export
 
-kuan_filter <- function(image, window_size = 3, ENL=0) {
+kuan_filter <- function(image, window_size = 3, ENL=NULL) {
 
   #with prepare_image a raster or spatraster get transformed in to matrix
   info <- .prepare_image(image)
