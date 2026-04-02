@@ -15,7 +15,7 @@ median_filter(image, window_size = 3)
 The filtered image. Returns a matrix if input was a matrix, RasterLayer if input was raster::RasterLayer, or SpatRaster if input was terra::SpatRaster.
 }
 \description{
-Applies a median filter to a grayscale image or raster to reduce speckle noise.
+Applies a median filter to a grayscale image/raster to reduce speckle noise.
 }
 \examples{
 \dontrun{

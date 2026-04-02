@@ -17,7 +17,7 @@ MSE_evaluation(image, filtered_image, filter_name = NULL)
 Mean Square Error
 }
 \description{
-Calculate the Mean Square Error to measure, which filter has the best outcome.
+Calculates the Mean Square Error to measure, which filter has the best outcome.
 }
 \details{
 Source: Comparison of Various Speckle Noise Reduction Filters on Synthetic Aperture Radar Image.Ardhi Wicaksono Santoso, Luhur Bayuaji, Lim Tien Sze, Habibah Lateh, Jasni Mohamad Zain

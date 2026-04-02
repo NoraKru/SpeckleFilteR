@@ -14,5 +14,4 @@ Loads the example Sentinel-1 TIF included in the package.
 }
 \examples{
 img <- load_example()
-plot(img)
 }

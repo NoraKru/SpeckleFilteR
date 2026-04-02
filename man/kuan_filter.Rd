@@ -9,7 +9,7 @@ kuan_filter(image, window_size = 3, ENL = 0)
 \arguments{
 \item{image}{A numeric matrix, raster::RasterLayer, or terra::SpatRaster representing the image.}
 
-\item{window_size}{An odd integer specifying the size of the local window. Default is 3.}
+\item{window_size}{An integer specifying the size of the local window. Default is 3.}
 
 \item{ENL}{Equivalent number of looks.}
 }
@@ -17,7 +17,7 @@ kuan_filter(image, window_size = 3, ENL = 0)
 The filtered image. Returns a matrix if input was a matrix, RasterLayer if input was raster::RasterLayer, or SpatRaster if input was terra::SpatRaster.
 }
 \description{
-Applies a Kuan filter to a grayscale image or raster to reduce speckle noise.
+Applies a Kuan filter to a grayscale image/raster to reduce speckle noise.
 }
 \details{
 Source: Active Remote Sensing - Tobi Ullmann

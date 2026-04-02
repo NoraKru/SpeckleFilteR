@@ -9,21 +9,15 @@ all_filters(image, window_size = 3, ENL = NULL, plot_result = TRUE)
 \arguments{
 \item{image}{A numeric matrix, raster::RasterLayer, or terra::SpatRaster representing the image.}
 
-\item{window_size}{An integer specifying the size of the local window for median/mean filters. Default is 3.}
+\item{window_size}{An integer specifying the size of the window. Default is 3.}
 
-\item{ENL}{Effective Number of Looks. If NULL, it is estimated per filter or you can use the function estimae_enl()}
+\item{ENL}{Effective Number of Looks.}
 
-\item{plot_result}{Logical. If TRUE, plots Original + filtered images.}
+\item{plot_result}{If TRUE, plots Original + filtered images.}
 }
 \value{
 A named list with filtered images: $lee, $kuan, $mean, $median
 }
 \description{
-Applies all filters to a grayscale image or raster to reduce speckle noise.
-}
-\examples{
-\dontrun{
-img <- load_example()
-filters <- all_filters(img, window_size = 3, ENL = 3.5, plot_result = TRUE)
-}
+Applies all filters to a grayscale image/raster to reduce speckle noise.
 }

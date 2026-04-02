@@ -21,7 +21,6 @@ Calculate the Average Difference to measure, which filter has the best outcome.
 }
 \details{
 Source: Comparison of Various Speckle Noise Reduction Filters on Synthetic Aperture Radar Image.Ardhi Wicaksono Santoso, Luhur Bayuaji, Lim Tien Sze, Habibah Lateh, Jasni Mohamad Zain
-#'
 }
 \examples{
 img <- load_example()

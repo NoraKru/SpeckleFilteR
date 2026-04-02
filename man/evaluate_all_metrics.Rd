@@ -12,7 +12,7 @@ evaluate_all_metrics(image, filtered_image)
 \item{filtered_image}{A single filtered image or a named list of filtered images}
 }
 \value{
-A data.frame with one row per filter and one column per metric
+A list containing a ranked data.frame of metrics and a textual summary.
 }
 \description{
 Computes several evaluation metrics (MSE, Average Difference, Speckle Index,
@@ -25,7 +25,6 @@ filters <- all_filters(img, window_size = 3, ENL = 3.5, plot_result = FALSE)
 metrics <- evaluate_all_metrics(img, filters)
 # Ranked table of evaluation metrics
 print(results$metrics)
-
 # Short textual summary
 cat(results$summary)
 }

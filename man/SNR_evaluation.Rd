@@ -2,7 +2,7 @@
 % Please edit documentation in R/SNR_evaluation.R
 \name{SNR_evaluation}
 \alias{SNR_evaluation}
-\title{Signal to Noise Ratio (SNR) for Evaluation the different Filter}
+\title{Signal to Noise Ratio (SNR) for Evaluation}
 \usage{
 SNR_evaluation(image, filtered_image, filter_name = NULL)
 }
