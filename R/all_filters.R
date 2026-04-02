@@ -15,11 +15,12 @@
 
 all_filters <- function(image, window_size = 3, ENL = NULL, plot_result = TRUE) {
 
+  img <-.prepare_image(image)
   #filter image with all four filter
-  lee_res    <- lee_filter(image, window_size = window_size, ENL = ENL)
-  kuan_res   <- kuan_filter(image, window_size = window_size, ENL = ENL)
-  mean_res   <- mean_filter(image, window_size = window_size)
-  median_res <- median_filter(image, window_size = window_size)
+  lee_res    <- lee_filter(img$matrix, window_size = window_size, ENL = ENL)
+  kuan_res   <- kuan_filter(img$matrix, window_size = window_size, ENL = ENL)
+  mean_res   <- mean_filter(img$matrix, window_size = window_size)
+  median_res <- median_filter(img$matrix, window_size = window_size)
 
   #write the results in one list
   filters <- list(
@@ -33,8 +34,8 @@ all_filters <- function(image, window_size = 3, ENL = NULL, plot_result = TRUE) 
 
     # Combine all image values (original and filtered) into a single vector
     # to calculate a common scale for direct comparison.
-    all_values <- (c(as.matrix(image),
-                          unlist(lapply(filters, as.matrix))))
+    all_values <- (c(img$matrix,
+                     unlist(lapply(filters, as.numeric))))
 
     full_range <- range(all_values, na.rm = TRUE)
 
@@ -57,21 +58,23 @@ all_filters <- function(image, window_size = 3, ENL = NULL, plot_result = TRUE) 
 
     # Internal helper function for consistent plotting across all filter outputs
     plot_fixed <- function(img_data, title) {
-      log_img <- (img_data)
       if (inherits(img_data, "SpatRaster") || inherits(img_data, "RasterLayer")) {
-        image(log_img, main=title, col=my_cols, breaks=color_breaks, axes=FALSE,useRaster=TRUE)
+        image(img_data, main=title, col=my_cols, breaks=color_breaks, axes=FALSE,useRaster=TRUE)
       } else {
-        image(log_img, main=title, col=my_cols, breaks=color_breaks,
+        image(img_data, main=title, col=my_cols, breaks=color_breaks,
               axes=FALSE, useRaster=TRUE)
       }
     }
 
+    plot_matrix <- t(img$matrix)[, nrow(img$matrix):1]
     # Plot the original image
-    plot_fixed(image, "Original")
+    plot_fixed(plot_matrix, "Original")
 
     # Plot each filtered result
     for (name in names(filters)) {
-      plot_fixed(filters[[name]], paste(name, "Filter"))
+      current_mat <- filters[[name]]
+      plot_matrix_filtered <- t(current_mat)[, nrow(current_mat):1]
+      plot_fixed(plot_matrix_filtered, paste(name, "Filter"))
     }
 
     #Adaptive Legend Construction
